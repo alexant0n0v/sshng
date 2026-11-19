@@ -1,0 +1,32 @@
+# frontend/dist is embedded by main.go (//go:embed all:frontend/dist), so keep
+# a placeholder: without it `go test` / `go vet` fail on a fresh clone.
+frontend/node_modules/
+frontend/dist/*
+!frontend/dist/.gitkeep
+# Written by Wails to decide when to re-run npm install
+frontend/package.json.md5
+
+# Local test data (SSHNG_DATA=...)
+profiles*.json
+*.sshng.json
+
+# Go
+*.test
+*.out
+coverage.*
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# Secrets that should never land here by accident
+.env
+.env.*
+*.pem
+*.key
+id_*
