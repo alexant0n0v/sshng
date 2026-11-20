@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"log"
+	"os"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -14,6 +15,11 @@ import (
 var assets embed.FS
 
 func main() {
+	// Helper mode: ssh runs us as its ProxyCommand to reach a host via SOCKS5.
+	if len(os.Args) > 1 && os.Args[1] == socksConnectFlag {
+		os.Exit(runSocksConnect(os.Args[2:]))
+	}
+
 	path, err := defaultStorePath()
 	if err != nil {
 		log.Fatal(err)

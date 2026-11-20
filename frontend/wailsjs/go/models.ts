@@ -73,6 +73,7 @@ export namespace main {
 	    port?: number;
 	    identityFile?: string;
 	    proxyJump?: string;
+	    socksProxy?: string;
 	    serverAliveInterval?: number;
 	    serverAliveCountMax?: number;
 	    connectTimeout?: number;
@@ -96,6 +97,7 @@ export namespace main {
 	        this.port = source["port"];
 	        this.identityFile = source["identityFile"];
 	        this.proxyJump = source["proxyJump"];
+	        this.socksProxy = source["socksProxy"];
 	        this.serverAliveInterval = source["serverAliveInterval"];
 	        this.serverAliveCountMax = source["serverAliveCountMax"];
 	        this.connectTimeout = source["connectTimeout"];

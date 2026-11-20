@@ -5,7 +5,7 @@ import { PROFILE_COLORS } from '../defaults';
 import { closeModal, openProfile, saveProfile, toast, useStore } from '../store';
 import { THEMES } from '../themes';
 import type { Profile, SSHOptions } from '../types';
-import { flatFolders } from '../utils';
+import { flatFolders, maskProxy } from '../utils';
 import { Field, ListEditor, Modal, NumberInput, Section, Segmented, TriState, useAutoFocus, useDebounced } from './ui';
 
 type Page = 'general' | 'ssh' | 'forwarding' | 'terminal';
@@ -143,6 +143,11 @@ export function ProfileEditor({ draft: initial, isNew }: { draft: Profile; isNew
               <Field label="Jump host (ProxyJump)">
                 <input value={p.ssh.proxyJump ?? ''} spellCheck={false} placeholder={defaults.proxyJump ? `Default: ${defaults.proxyJump}` : 'user@bastion:22'}
                   onChange={(e) => setSSH({ proxyJump: e.target.value || undefined })} />
+              </Field>
+              <Field label="SOCKS5 proxy" hint={defaults.socksProxy ? 'type none to bypass the default' : '[user:pass@]host:port'}>
+                <input value={p.ssh.socksProxy ?? ''} spellCheck={false}
+                  placeholder={defaults.socksProxy ? `Default: ${maskProxy(defaults.socksProxy)}` : 'proxy.example.com:1080'}
+                  onChange={(e) => setSSH({ socksProxy: e.target.value || undefined })} />
               </Field>
               <Field label="Host key checking">
                 <select value={p.ssh.strictHostKeyChecking ?? ''} onChange={(e) => setSSH({ strictHostKeyChecking: e.target.value || undefined })}>

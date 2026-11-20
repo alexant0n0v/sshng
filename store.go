@@ -24,6 +24,7 @@ type SSHOptions struct {
 	Port                  int      `json:"port,omitempty"`
 	IdentityFile          string   `json:"identityFile,omitempty"`
 	ProxyJump             string   `json:"proxyJump,omitempty"`
+	SocksProxy            string   `json:"socksProxy,omitempty"` // [socks5://][user:pass@]host[:port]; "none" disables the default
 	ServerAliveInterval   *int     `json:"serverAliveInterval,omitempty"`
 	ServerAliveCountMax   *int     `json:"serverAliveCountMax,omitempty"`
 	ConnectTimeout        *int     `json:"connectTimeout,omitempty"`

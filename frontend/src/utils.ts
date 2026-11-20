@@ -66,3 +66,8 @@ export const SORT_LABELS: Record<SortMode, string> = {
   recent: 'Recently used',
   created: 'Recently added',
 };
+
+/** Hides the password in a SOCKS proxy setting, e.g. for placeholders. */
+export function maskProxy(s: string): string {
+  return s.replace(/^((?:[a-z0-9]+:\/\/)?[^:@/]*):[^@]*@/i, '$1:••••@');
+}

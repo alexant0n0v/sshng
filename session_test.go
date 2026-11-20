@@ -30,7 +30,7 @@ func TestSessionOutputAndExit(t *testing.T) {
 			close(done)
 		}
 	}
-	id, err := m.Start("/bin/sh", []string{"-c", "read x; echo got-$x; exit 3"}, 80, 24)
+	id, err := m.Start("/bin/sh", []string{"-c", "read x; echo got-$x; exit 3"}, nil, 80, 24)
 	if err != nil {
 		t.Fatal(err)
 	}

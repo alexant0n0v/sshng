@@ -6,6 +6,7 @@ export interface SSHOptions {
   port?: number;
   identityFile?: string;
   proxyJump?: string;
+  socksProxy?: string; // [socks5://][user:pass@]host[:port]; "none" disables the default
   serverAliveInterval?: number;
   serverAliveCountMax?: number;
   connectTimeout?: number;
