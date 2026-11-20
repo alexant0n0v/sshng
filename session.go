@@ -58,7 +58,7 @@ func (m *SessionManager) Count() int {
 	return len(m.sessions)
 }
 
-func (m *SessionManager) Start(bin string, args []string, cols, rows int) (string, error) {
+func (m *SessionManager) Start(bin string, args, env []string, cols, rows int) (string, error) {
 	if cols <= 0 || rows <= 0 {
 		cols, rows = 80, 24
 	}
@@ -71,7 +71,7 @@ func (m *SessionManager) Start(bin string, args []string, cols, rows int) (strin
 		return "", err
 	}
 	cmd := p.Command(bin, args...)
-	cmd.Env = append(os.Environ(), "TERM=xterm-256color")
+	cmd.Env = append(append(os.Environ(), "TERM=xterm-256color"), env...)
 	if err := cmd.Start(); err != nil {
 		_ = p.Close()
 		return "", fmt.Errorf("cannot start %s: %w", bin, err)

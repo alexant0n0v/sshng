@@ -112,6 +112,9 @@ function SSHPage() {
         <Field label="Jump host (ProxyJump)">
           <input value={ssh.proxyJump ?? ''} spellCheck={false} placeholder="none" onChange={(e) => set({ proxyJump: e.target.value || undefined })} />
         </Field>
+        <Field label="SOCKS5 proxy" hint="[socks5://][user:pass@]host:port — used for every connection">
+          <input value={ssh.socksProxy ?? ''} spellCheck={false} placeholder="none" onChange={(e) => set({ socksProxy: e.target.value || undefined })} />
+        </Field>
         <Field label="Host key checking">
           <select value={ssh.strictHostKeyChecking ?? ''} onChange={(e) => set({ strictHostKeyChecking: e.target.value || undefined })}>
             <option value="">ssh default (ask)</option>

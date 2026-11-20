@@ -22,6 +22,9 @@ func effectiveOptions(def, p SSHOptions) SSHOptions {
 	if p.ProxyJump != "" {
 		e.ProxyJump = p.ProxyJump
 	}
+	if p.SocksProxy != "" {
+		e.SocksProxy = p.SocksProxy
+	}
 	if p.ServerAliveInterval != nil {
 		e.ServerAliveInterval = p.ServerAliveInterval
 	}
@@ -89,8 +92,19 @@ func buildArgs(defaults SSHOptions, p Profile) ([]string, error) {
 	if e.IdentityFile != "" {
 		args = append(args, "-i", e.IdentityFile)
 	}
+	sp, err := parseSocksProxy(e.SocksProxy)
+	if err != nil {
+		return nil, err
+	}
+	if sp != nil && e.ProxyJump != "" {
+		// The jump connection is a separate ssh process that wouldn't use the proxy.
+		return nil, errors.New("a SOCKS proxy can't be combined with a jump host; set one of them to none for this profile")
+	}
 	if e.ProxyJump != "" {
 		args = append(args, "-J", e.ProxyJump)
+	}
+	if sp != nil {
+		args = append(args, "-o", "ProxyCommand="+proxyCommand(sp))
 	}
 	if e.Compression != nil {
 		if *e.Compression {

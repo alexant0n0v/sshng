@@ -127,7 +127,7 @@ func (a *App) start(p Profile, cols, rows int) (ConnectResult, error) {
 	if err != nil {
 		return ConnectResult{}, err
 	}
-	id, err := a.sessions.Start(bin, args, cols, rows)
+	id, err := a.sessions.Start(bin, args, sessionEnv(s.SSH, p), cols, rows)
 	if err != nil {
 		return ConnectResult{}, err
 	}
